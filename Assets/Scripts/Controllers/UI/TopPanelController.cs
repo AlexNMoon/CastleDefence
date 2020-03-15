@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using Managers;
+using ScriptableObjects;
 using TMPro;
 using UnityEngine;
 
@@ -49,6 +52,39 @@ namespace Controllers.UI
                 secondsLeft--;
                 SetTimerText(secondsLeft);
             }
+        }
+
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            GameFlowManager.SetPlayerParams += OnSetPlayerParams;
+            GameFlowManager.SetWaves += OnSetWaves;
+        }
+
+        private void OnSetPlayerParams(Player player)
+        {
+            SetHealthText(player.Health, player.Health);
+            SetCoinsText(player.Coins);
+        }
+
+        private void OnSetWaves(List<Wave> waves)
+        {
+            SetWavesText(0, waves.Count);
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+
+        private void UnsubscribeEvents()
+        {
+            GameFlowManager.SetPlayerParams -= OnSetPlayerParams;
+            GameFlowManager.SetWaves -= OnSetWaves;
         }
     }
 }

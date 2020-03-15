@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Managers;
+using ScriptableObjects;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Controllers.UI
@@ -11,6 +14,7 @@ namespace Controllers.UI
         private void OnEnable()
         {
             AddListeners();
+            SubscribeEvents();
         }
 
         private void AddListeners()
@@ -23,14 +27,30 @@ namespace Controllers.UI
             
         }
 
+        private void SubscribeEvents()
+        {
+            GameFlowManager.SetTowers += OnSetTowers;
+        }
+
+        private void OnSetTowers(List<Tower> towers)
+        {
+            TowerControlPanel.SetBuyTowerPanel(towers);
+        }
+
         private void OnDisable()
         {
             RemoveListeners();
+            UnsubscribeEvents();
         }
 
         private void RemoveListeners()
         {
             StartButton.onClick.RemoveListener(OnStartButtonClick);
+        }
+
+        private void UnsubscribeEvents()
+        {
+            
         }
     }
 }
