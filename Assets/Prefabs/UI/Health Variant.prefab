@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 8232644198080861419, guid: 4635f432ca913984a9dbf1bb7c66f813,
         type: 3}
       propertyPath: m_Name
-      value: Health
+      value: Health Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2845085066469611406, guid: 4635f432ca913984a9dbf1bb7c66f813,
         type: 3}
@@ -116,6 +116,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0.8093424
+      objectReference: {fileID: 0}
+    - target: {fileID: 1747398589452595132, guid: 4635f432ca913984a9dbf1bb7c66f813,
+        type: 3}
+      propertyPath: m_text
+      value: 20/20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1747398589452595132, guid: 4635f432ca913984a9dbf1bb7c66f813,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 24.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1747398589452595132, guid: 4635f432ca913984a9dbf1bb7c66f813,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4635f432ca913984a9dbf1bb7c66f813, type: 3}

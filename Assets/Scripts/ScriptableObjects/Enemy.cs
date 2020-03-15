@@ -9,5 +9,7 @@ namespace ScriptableObjects
         public float Speed;
         public float Damage;
         public EnemyController Prefab;
+        public int MinCoins;
+        public int MaxCoins;
     }
 }
