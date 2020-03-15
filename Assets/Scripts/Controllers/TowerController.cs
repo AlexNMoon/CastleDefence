@@ -1,18 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using ScriptableObjects;
 using UnityEngine;
 
-public class TowerController : MonoBehaviour
+namespace Controllers
 {
-    // Start is called before the first frame update
-    void Start()
+    public class TowerController : MonoBehaviour
     {
-        
-    }
+        public Tower Config { get; set; }
+        public GameObject ThisGameObject;
+        public SpriteRenderer TowerRenderer;
+        public CircleCollider2D CircleCollider;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void SetUpTower(Tower tower)
+        {
+            Config = tower;
+            TowerRenderer.sprite = Config.Image;
+            CircleCollider.radius = Config.Range;
+            EnableTower(true);
+        }
+
+        private void EnableTower(bool isEnabled)
+        {
+            ThisGameObject.SetActive(isEnabled);
+        }
+
+        public void HideTower()
+        {
+            EnableTower(false);
+        }
     }
 }

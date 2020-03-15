@@ -8,6 +8,8 @@ namespace Controllers.UI
 {
     public class TowerControlPanelController : MonoBehaviour
     {
+        public static event Action TowerControlPanelClose;
+        
         public BuyTowerPanelController BuyTowerController;
         public SellTowerPanelController SellTowerController;
         public Button CancelButton;
@@ -49,6 +51,7 @@ namespace Controllers.UI
         private void OnCancelButtonClick()
         {
             ClosePanels();
+            TowerControlPanelClose?.Invoke();
         }
 
         private void ClosePanels()

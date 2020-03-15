@@ -30,11 +30,23 @@ namespace Controllers.UI
         private void SubscribeEvents()
         {
             GameFlowManager.SetTowers += OnSetTowers;
+            TowerHolderController.SelectTowerToBuy += OnSelectTowerToBuy;
+            TowerHolderController.SelectTowerToSell += OnSelectTowerToSell;
         }
 
         private void OnSetTowers(List<Tower> towers)
         {
             TowerControlPanel.SetBuyTowerPanel(towers);
+        }
+
+        private void OnSelectTowerToBuy()
+        {
+            TowerControlPanel.OpenBuyTowerPanel();
+        }
+
+        private void OnSelectTowerToSell(Tower tower)
+        {
+            TowerControlPanel.OpenSellTowerPanel(tower);
         }
 
         private void OnDisable()
@@ -50,7 +62,9 @@ namespace Controllers.UI
 
         private void UnsubscribeEvents()
         {
-            
+            GameFlowManager.SetTowers -= OnSetTowers;
+            TowerHolderController.SelectTowerToBuy -= OnSelectTowerToBuy;
+            TowerHolderController.SelectTowerToSell -= OnSelectTowerToSell;
         }
     }
 }
