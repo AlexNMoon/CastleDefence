@@ -2,6 +2,7 @@
 using Controllers.UI;
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Controllers
 {
@@ -60,6 +61,8 @@ namespace Controllers
 
         private void OnMouseUp()
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
             _isInSetting = true;
             if(!_isPlaced)
                 SelectTowerToBuy?.Invoke();
