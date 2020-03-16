@@ -1,4 +1,5 @@
 ﻿using System;
+using Managers;
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
@@ -27,6 +28,7 @@ namespace Controllers.UI
         private void OnEnable()
         {
             AddListeners();
+            CheckAvailability();
         }
 
         private void AddListeners()
@@ -39,6 +41,13 @@ namespace Controllers.UI
             ToggleValueChanged?.Invoke(_towerConfig, isOn);
         }
 
+        private void CheckAvailability()
+        {
+            if (_towerConfig.BuildPrice > PlayerManager.Instance.Coins)
+                TowerToggle.interactable = false;
+            else if(!TowerToggle.interactable)
+                TowerToggle.interactable = true;
+        }
 
         private void OnDisable()
         {

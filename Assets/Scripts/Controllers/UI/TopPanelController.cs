@@ -15,6 +15,8 @@ namespace Controllers.UI
         public TMP_Text WavesText;
         public TMP_Text TimerText;
 
+        private Player _playerConfig;
+
         public void SetHealthText(int currentHealth, int maxHealth)
         {
             HealthText.text = currentHealth + "/" + maxHealth;
@@ -63,17 +65,30 @@ namespace Controllers.UI
         {
             GameFlowManager.SetPlayerParams += OnSetPlayerParams;
             GameFlowManager.SetWaves += OnSetWaves;
+            PlayerManager.HealthChanged += OnHealthChanged;
+            PlayerManager.CoinsChanged += OnCoinsChanged;
         }
 
         private void OnSetPlayerParams(Player player)
         {
-            SetHealthText(player.Health, player.Health);
-            SetCoinsText(player.Coins);
+            _playerConfig = player;
+            SetHealthText(_playerConfig.Health, _playerConfig.Health);
+            SetCoinsText(_playerConfig.Coins);
         }
 
         private void OnSetWaves(List<Wave> waves)
         {
             SetWavesText(0, waves.Count);
+        }
+
+        private void OnHealthChanged(int health)
+        {
+            SetHealthText(health, _playerConfig.Health);
+        }
+
+        private void OnCoinsChanged(int coins)
+        {
+            SetCoinsText(coins);
         }
 
         private void OnDisable()

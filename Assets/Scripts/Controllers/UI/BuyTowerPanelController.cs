@@ -52,6 +52,7 @@ namespace Controllers.UI
         public void EnablePanel(bool isEnabled)
         {
             Panel.SetActive(isEnabled);
+            TowerToggleGroup.SetAllTogglesOff();
         }
         
         private void OnEnable()

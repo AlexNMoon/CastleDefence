@@ -59,7 +59,7 @@ namespace Controllers
             _isPlaced = false;
         }
 
-        private void OnMouseUp()
+        private void OnMouseUpAsButton()
         {
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
