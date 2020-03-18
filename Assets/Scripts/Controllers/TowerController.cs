@@ -1,4 +1,6 @@
-﻿using ScriptableObjects;
+﻿using System;
+using System.Collections.Generic;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Controllers
@@ -9,6 +11,8 @@ namespace Controllers
         public GameObject ThisGameObject;
         public SpriteRenderer TowerRenderer;
         public CircleCollider2D CircleCollider;
+
+        private List<EnemyController> _enemiesInRange = new List<EnemyController>();
 
         public void SetUpTower(Tower tower)
         {
@@ -26,6 +30,31 @@ namespace Controllers
         public void HideTower()
         {
             EnableTower(false);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.gameObject.tag.Equals("Enemy"))
+            {
+                EnemyController enemyController = collider.GetComponent<EnemyController>();
+                _enemiesInRange.Add(enemyController);
+                enemyController.Destroyed += OnEnemyDestroyed;
+            }
+        }
+
+        private void OnEnemyDestroyed(EnemyController enemyController)
+        {
+            _enemiesInRange.Remove(enemyController);
+        }
+
+        private void OnTriggerExit2D(Collider2D collider)
+        {
+            if (collider.gameObject.tag.Equals("Enemy"))
+            {
+                EnemyController enemyController = collider.GetComponent<EnemyController>();
+                _enemiesInRange.Remove(enemyController);
+                enemyController.Destroyed -= OnEnemyDestroyed;
+            }
         }
     }
 }

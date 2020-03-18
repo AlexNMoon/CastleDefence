@@ -9,7 +9,8 @@ using Random = UnityEngine.Random;
 public class EnemyController : MonoBehaviour
 {
     public static event Action<int> Attacked;
-    public static event Action<int> DroppedCoins; 
+    public static event Action<int> DroppedCoins;
+    public event Action<EnemyController> Destroyed;
     
     public Animator EnemyAnimator;
     public Enemy Config;
@@ -59,5 +60,10 @@ public class EnemyController : MonoBehaviour
     private void DropCoins()
     {
         DroppedCoins?.Invoke(Random.Range(Config.MinCoins, Config.MaxCoins));
+    }
+    
+    private void OnDestroy()
+    {
+        
     }
 }
