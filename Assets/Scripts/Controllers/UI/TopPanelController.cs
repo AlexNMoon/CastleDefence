@@ -32,30 +32,6 @@ namespace Controllers.UI
             WavesText.text = currentWave + "/" + waveCount;
         }
 
-        public void StartTimer(float seconds)
-        {
-            SetTimerText(seconds);
-            StartCoroutine(Timer(seconds));
-        }
-
-        private void SetTimerText(float time)
-        {
-            string minutes = Mathf.Floor(time / 60).ToString("00");
-            string seconds = (time % 60).ToString("00");
-            TimerText.text = minutes + ":" + seconds;
-        }
-
-        private IEnumerator Timer(float seconds)
-        {
-            float secondsLeft = seconds;
-            while (secondsLeft > 0)
-            {
-                yield return new WaitForSeconds(1f);
-                secondsLeft--;
-                SetTimerText(secondsLeft);
-            }
-        }
-
         private void OnEnable()
         {
             SubscribeEvents();
@@ -67,6 +43,8 @@ namespace Controllers.UI
             GameFlowManager.SetWaves += OnSetWaves;
             PlayerManager.HealthChanged += OnHealthChanged;
             PlayerManager.CoinsChanged += OnCoinsChanged;
+            EnemySpawnController.TimeChanged += SetTimerText;
+            EnemySpawnController.WaveStarted += OnWaveStarted;
         }
 
         private void OnSetPlayerParams(Player player)
@@ -91,6 +69,18 @@ namespace Controllers.UI
             SetCoinsText(coins);
         }
 
+        private void SetTimerText(float time)
+        {
+            string minutes = Mathf.Floor(time / 60).ToString("00");
+            string seconds = (time % 60).ToString("00");
+            TimerText.text = minutes + ":" + seconds;
+        }
+
+        private void OnWaveStarted(int count, int maxCount)
+        {
+            SetWavesText(count, maxCount);
+        }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
@@ -100,6 +90,8 @@ namespace Controllers.UI
         {
             GameFlowManager.SetPlayerParams -= OnSetPlayerParams;
             GameFlowManager.SetWaves -= OnSetWaves;
+            EnemySpawnController.TimeChanged -= SetTimerText;
+            EnemySpawnController.WaveStarted -= OnWaveStarted;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Managers;
 using ScriptableObjects;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace Controllers.UI
 {
     public class PanelsController : MonoBehaviour
     {
+        public static event Action StartButtonClick; 
+        
         public TowerControlPanelController TowerControlPanel;
         public Button StartButton;
         
@@ -24,7 +27,8 @@ namespace Controllers.UI
 
         private void OnStartButtonClick()
         {
-            
+            StartButtonClick?.Invoke();
+            StartButton.gameObject.SetActive(false);
         }
 
         private void SubscribeEvents()

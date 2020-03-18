@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tower0
   m_EditorClassIdentifier: 
   BuildPrice: 20
-  Range: 1
+  Range: 8
   Image: {fileID: 21300000, guid: 8920edc1c638b7a47b6e2cfcf0f71478, type: 3}
   ShootInterval: 1
   Damage: 5

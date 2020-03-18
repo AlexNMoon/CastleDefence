@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5cbab6745cc7b145adcd84c84b61bfc, type: 3}
   m_Name: Wave0
   m_EditorClassIdentifier: 
-  Duration: 60
+  Duration: 20
   EnemiesCount: 5
+  SpawnInterval: 1
+  EnemiesPrefabs:
+  - {fileID: 4015302936631859818, guid: 0e74c2a59622f9e4e8ab43837dfe2c5a, type: 3}

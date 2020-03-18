@@ -7,8 +7,7 @@ namespace ScriptableObjects
     {
         public float Health;
         public float Speed;
-        public float Damage;
-        public EnemyController Prefab;
+        public int Damage;
         public int MinCoins;
         public int MaxCoins;
     }

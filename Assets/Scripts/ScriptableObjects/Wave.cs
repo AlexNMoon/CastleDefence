@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace ScriptableObjects
 {
@@ -7,5 +8,7 @@ namespace ScriptableObjects
     {
         public float Duration;
         public int EnemiesCount;
+        public float SpawnInterval;
+        public List<EnemyController> EnemiesPrefabs;
     }
 }
