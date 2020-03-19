@@ -27,6 +27,7 @@ namespace Controllers
             TowerControlPanelController.TowerControlPanelClose += OnTowerControlPanelClose;
             BuyTowerPanelController.TowerBought += OnTowerBought;
             SellTowerPanelController.TowerSold += OnTowerSold;
+            EndScreenController.Restart += OnRestart;
         }
 
         private void OnTowerControlPanelClose()
@@ -70,6 +71,14 @@ namespace Controllers
                 SelectTowerToSell?.Invoke(CurrentTower.Config);
         }
 
+        private void OnRestart()
+        {
+            EnablePlaceholder(true);
+            CurrentTower.HideTower();
+            _isInSetting = false;
+            _isPlaced = false;
+        }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
@@ -80,6 +89,7 @@ namespace Controllers
             TowerControlPanelController.TowerControlPanelClose -= OnTowerControlPanelClose;
             BuyTowerPanelController.TowerBought -= OnTowerBought;
             SellTowerPanelController.TowerSold -= OnTowerSold;
+            EndScreenController.Restart += OnRestart;
         }
     }
 }

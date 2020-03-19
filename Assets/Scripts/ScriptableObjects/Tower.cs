@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Controllers;
+using UnityEngine;
 
 namespace ScriptableObjects
 {
@@ -9,6 +10,7 @@ namespace ScriptableObjects
         public float Range;
         public Sprite Image;
         public float ShootInterval;
-        public float Damage;
+        public int Damage;
+        public ArrowController ArrowPrefab;
     }
 }

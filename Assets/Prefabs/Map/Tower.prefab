@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 980a67cdeab098a40ac43d14282b1a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThisGameObject: {fileID: 7119945850773324968}
+  ThisTranform: {fileID: 65995674996214557}
   TowerRenderer: {fileID: 7458060592648829892}
   CircleCollider: {fileID: 7440974983371671865}
 --- !u!1 &9192853206070612442

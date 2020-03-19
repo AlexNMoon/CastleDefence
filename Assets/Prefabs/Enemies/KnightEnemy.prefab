@@ -116,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyAnimator: {fileID: 4015302936631859813}
   Config: {fileID: 11400000, guid: 4c8b7a99484f54141bc058db50d5d144, type: 2}
+  ThisTransform: {fileID: 4015302936631859819}
 --- !u!50 &220404600570490923
 Rigidbody2D:
   serializedVersion: 4

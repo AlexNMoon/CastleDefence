@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Controllers;
 using Controllers.UI;
 using Managers;
 using ScriptableObjects;
@@ -10,7 +11,8 @@ using Random = UnityEngine.Random;
 public class EnemySpawnController : MonoBehaviour
 {
     public static event Action<float> TimeChanged;
-    public static event Action<int, int> WaveStarted; 
+    public static event Action<int, int> WaveStarted;
+    public static event Action GameWin;
     
     public List<GameObject> Waypoints;
 
@@ -67,6 +69,16 @@ public class EnemySpawnController : MonoBehaviour
             _currentWave++;
             StartWave();
         }
+        else
+        {
+            SetGameWin();
+        }
+    }
+
+    private void SetGameWin()
+    {
+        StopAllCoroutines();
+        GameWin?.Invoke();
     }
 
     private IEnumerator Spawn()

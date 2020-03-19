@@ -65,6 +65,7 @@ namespace Controllers.UI
         {
             BuyTowerController.ClosePanel += ClosePanels;
             SellTowerController.ClosePanel += ClosePanels;
+            
         }
 
         private void OnDisable()

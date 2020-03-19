@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0d968d8caca2848b5b9f5b2ea45ddf, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: 
-  Health: 10
+  Health: 25
   Speed: 1
   Damage: 10
-  MinCoins: 1
+  MinCoins: 10
   MaxCoins: 20

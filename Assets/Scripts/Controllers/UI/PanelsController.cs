@@ -12,6 +12,7 @@ namespace Controllers.UI
         public static event Action StartButtonClick; 
         
         public TowerControlPanelController TowerControlPanel;
+        public EndScreenController EndScreenPanel;
         public Button StartButton;
         
         private void OnEnable()
@@ -28,7 +29,12 @@ namespace Controllers.UI
         private void OnStartButtonClick()
         {
             StartButtonClick?.Invoke();
-            StartButton.gameObject.SetActive(false);
+            EnableStartButton(false);
+        }
+
+        private void EnableStartButton(bool isEnabled)
+        {
+            StartButton.gameObject.SetActive(isEnabled);
         }
 
         private void SubscribeEvents()
@@ -36,6 +42,9 @@ namespace Controllers.UI
             GameFlowManager.SetTowers += OnSetTowers;
             TowerHolderController.SelectTowerToBuy += OnSelectTowerToBuy;
             TowerHolderController.SelectTowerToSell += OnSelectTowerToSell;
+            PlayerManager.GameEnd += OnGameEnd;
+            EnemySpawnController.GameWin += OnGameWin;
+            EndScreenController.Restart += OnRestart;
         }
 
         private void OnSetTowers(List<Tower> towers)
@@ -51,6 +60,21 @@ namespace Controllers.UI
         private void OnSelectTowerToSell(Tower tower)
         {
             TowerControlPanel.OpenSellTowerPanel(tower);
+        }
+
+        private void OnGameEnd()
+        {
+            EndScreenPanel.ShowLoseText();
+        }
+
+        private void OnGameWin()
+        {
+            EndScreenPanel.ShowWinText();
+        }
+
+        private void OnRestart()
+        {
+            EnableStartButton(true);
         }
 
         private void OnDisable()
@@ -69,6 +93,8 @@ namespace Controllers.UI
             GameFlowManager.SetTowers -= OnSetTowers;
             TowerHolderController.SelectTowerToBuy -= OnSelectTowerToBuy;
             TowerHolderController.SelectTowerToSell -= OnSelectTowerToSell;
+            PlayerManager.GameEnd -= OnGameEnd;
+            EnemySpawnController.GameWin -= OnGameWin;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Controllers.UI;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -10,7 +11,6 @@ namespace Managers
         public static event Action<List<Tower>> SetTowers;
         public static event Action<Player> SetPlayerParams;
         public static event Action<List<Wave>> SetWaves;
-        public static event Action<List<Enemy>> SetEnemies;
         
         public ConfigsHolder Configs;
 
@@ -24,7 +24,32 @@ namespace Managers
             SetTowers?.Invoke(Configs.TowersConfig);
             SetPlayerParams?.Invoke(Configs.PlayerConfig);
             SetWaves?.Invoke(Configs.WavesConfig);
-            SetEnemies?.Invoke(Configs.EnemiesConfig);
+        }
+
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            EndScreenController.Restart += OnRestart;
+        }
+
+        private void OnRestart()
+        {
+            SetPlayerParams?.Invoke(Configs.PlayerConfig);
+            SetWaves?.Invoke(Configs.WavesConfig);
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+
+        private void UnsubscribeEvents()
+        {
+            EndScreenController.Restart -= OnRestart;
         }
     }
 }
