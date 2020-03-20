@@ -25,8 +25,10 @@ namespace Controllers
         public float DistanceToCastle()
         {
             float distance = 0;
+            //Get distance to the next waypoint
             distance += Vector2.Distance(ThisTransform.position, 
                 Waypoints [_currentWaypoint + 1].transform.position);
+            //Calculate whole distance to the las waypoint
             for (int i = _currentWaypoint + 1; i < Waypoints.Count - 1; i++)
             {
                 Vector3 startPosition = Waypoints[i].transform.position;
@@ -40,18 +42,7 @@ namespace Controllers
         {
             _currentHealth -= damage;
             if(_currentHealth <= 0)
-                StartCoroutine(Die());
-        }
-
-        private IEnumerator Die()
-        {
-            EnemyAnimator.SetBool("IsAlive", false);
-            while (EnemyAnimator.GetCurrentAnimatorStateInfo(0).length >
-                   EnemyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime)
-            {
-                yield return new WaitForFixedUpdate();
-            }
-            DropCoins();
+                DropCoins();
         }
 
         private void DropCoins()
@@ -78,12 +69,16 @@ namespace Controllers
 
         private void Move()
         { 
+            //Get start and end positions
             Vector3 startPosition = Waypoints[_currentWaypoint].transform.position;
             Vector3 endPosition = Waypoints[_currentWaypoint + 1].transform.position;
+            //Get length of the path and time to move through it
             float pathLength = Vector3.Distance (startPosition, endPosition);
             float totalTimeForPath = pathLength / Config.Speed;
             float currentTimeOnPath = Time.time - _lastWaypointSwitchTime;
+            //Move enemy
             ThisTransform.position = Vector2.Lerp (startPosition, endPosition, currentTimeOnPath / totalTimeForPath);
+            //CHeck if enemy is at the next waypoint
             if (ThisTransform.position.Equals(endPosition)) 
             {
                 if (_currentWaypoint < Waypoints.Count - 2)

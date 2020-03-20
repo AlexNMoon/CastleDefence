@@ -43,6 +43,7 @@ namespace Controllers.UI
 
         private void CheckAvailability()
         {
+            //Check if player has enough coins
             if (_towerConfig.BuildPrice > PlayerManager.Instance.Coins)
                 TowerToggle.interactable = false;
             else if(!TowerToggle.interactable)

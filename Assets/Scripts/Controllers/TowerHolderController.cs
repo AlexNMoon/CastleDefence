@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Controllers.UI;
 using ScriptableObjects;
 using UnityEngine;
@@ -62,13 +63,22 @@ namespace Controllers
 
         private void OnMouseUpAsButton()
         {
-            if (EventSystem.current.IsPointerOverGameObject())
+            if (IsPointerOverUIObject())
                 return;
             _isInSetting = true;
             if(!_isPlaced)
                 SelectTowerToBuy?.Invoke();
             else
                 SelectTowerToSell?.Invoke(CurrentTower.Config);
+        }
+        private bool IsPointerOverUIObject() 
+        {
+            //Check if pointer (mouse or touch) is over UI element
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+            return results.Count > 0;
         }
 
         private void OnRestart()

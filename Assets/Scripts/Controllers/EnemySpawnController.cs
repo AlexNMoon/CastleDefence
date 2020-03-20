@@ -85,6 +85,7 @@ public class EnemySpawnController : MonoBehaviour
     {
         for (int i = 0; i < _waves[_currentWave].EnemiesCount; i++)
         {
+            //Spawn enemy from list of possible enemies for this wave
             EnemyController newEnemy = Instantiate(_waves[_currentWave].
                 EnemiesPrefabs[Random.Range(0, _waves.Count - 1)], Waypoints[0].transform.position, 
                 Quaternion.Euler(new Vector3(0, 180, 0)));

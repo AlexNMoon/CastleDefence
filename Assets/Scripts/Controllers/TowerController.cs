@@ -55,6 +55,7 @@ namespace Controllers
         private void Attack()
         {
             float minimalEnemyDistance = float.MaxValue;
+            //Select the enemy closest to the castle
             for (int i = 0; i < _enemiesInRange.Count; i++)
             {
                 float distance = _enemiesInRange[i].DistanceToCastle();
@@ -84,6 +85,7 @@ namespace Controllers
 
         private ArrowController GetArrowFromPool()
         {
+            //Get arrow from pool or create new 
             for (int i = 0; i < _arrowsPool.Count; i++)
             {
                 if (_arrowsPool[i].gameObject.activeInHierarchy.Equals(false))

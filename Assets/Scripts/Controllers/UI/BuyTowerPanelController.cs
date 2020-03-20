@@ -22,6 +22,7 @@ namespace Controllers.UI
 
         public void SetPanel(List<Tower> towers)
         {
+            //Set toggles with towers to buy into two columns
             List<Tower> firstColumnTowers = towers.GetRange(0, towers.Count / 2);
             List<Tower> secondColumnTowers = towers.GetRange(towers.Count / 2, towers.Count / 2);
             for (int i = 0; i < firstColumnTowers.Count; i++)

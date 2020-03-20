@@ -46,13 +46,15 @@ namespace Controllers
             if (gameObject.activeSelf)
             {
                 float timeInterval = Time.time - _startTime;
+                //Rotate arrow to look at the target
                 Vector3 direction = gameObject.transform.position - _targetPosition;
                 CurrentTransform.rotation = Quaternion.AngleAxis(
                     Mathf.Atan2 (direction.y, direction.x) * 180 / Mathf.PI,
                     new Vector3 (0, 0, 1));
+                //Move arrow to the target in time that depends on speed and distance to target
                 CurrentTransform.position = Vector3.Lerp(_startPosition, _targetPosition, 
                     timeInterval * Speed / _distance);
-
+                //CHeck if arrow got to the target position
                 if (CurrentTransform.position.Equals(_targetPosition))
                 {
                     if (_target != null)

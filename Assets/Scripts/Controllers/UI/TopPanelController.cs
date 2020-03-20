@@ -71,6 +71,7 @@ namespace Controllers.UI
 
         private void SetTimerText(float time)
         {
+            //Get strings for seconds and minutes from time
             string minutes = Mathf.Floor(time / 60).ToString("00");
             string seconds = (time % 60).ToString("00");
             TimerText.text = minutes + ":" + seconds;
